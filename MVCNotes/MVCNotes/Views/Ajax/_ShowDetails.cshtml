@@ -1,0 +1,14 @@
+﻿@model MVCNotes.Models.Product
+
+@if (Model.ProdCode == null)
+{
+    <h1> Invalid Product Code.</h1>
+}
+else
+{
+    <h3>
+        Code : @Model.ProdCode <br />
+        Name : @Model.ProdName <br />
+        Qty : @Model.ProdQty 
+    </h3>
+}

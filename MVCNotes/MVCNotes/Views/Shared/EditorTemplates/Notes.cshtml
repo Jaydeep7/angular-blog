@@ -1,0 +1,7 @@
+﻿
+@model MVCNotes.Views.Home.Notes
+@Html.HiddenFor( x => x.Id)
+@Html.TextAreaFor( x=> x.Description)
+@Html.CheckBoxFor(x=> x.Completed)
+@Html.DisplayFor( x => x.EmailId)
+<br />

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "ViewBagDemo";
+}
+<form></form>
+<select id="sltCourse">
+    <option>Select Course</option>
+    @foreach (var course in ViewBag.Courses as List<TransferDataFromControllerToView.Models.Course>)
+    {
+        <option> @course.CourseName  </option>
+    }
+
+</select>
+
+<div id="StudentDetails">
+    <h3>...Enrolled Students...</h3>
+
+</div>
+
+
+<h2>ViewBagDemo</h2>
+@section MyScripts
+{
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script type="text/javascript">
+        var selectedCourse;
+        $(function () {
+            $('#StudentDetails').fadeOut();
+            $('#sltCourse').on('change', function () {
+                selectedCourse = this.value;
+
+                if (selectedCourse == 'Select Course') {
+                    $('#StudentDetails').append('<h3> Please Select Course</h3>');
+                }
+                else {
+                    getStudentDetails();
+                }
+                $('#StudentDetails').fadeIn();
+            });
+
+
+        });
+
+        function getStudentDetails() {
+            var stud = @Html.Raw(Json.Encode(ViewBag.Students));
+            $('#StudentDetails').empty();
+            $('#StudentDetails').append('<table border = 1> <tr> <td>Enrollment No.</td> <td>Student Name</td> </tr>');
+            $('#StudentDetails').append('<tr> <td>No.</td> <td>Student Name</td> </tr>');
+            for(var i =0;i < stud.length-1; i++){
+                var crs = stud[i].EnrolledCourses;
+                for(var j = 0; j<= crs.length-1; j++){
+                    console.log(crs[i]);
+                    if (selectedCourse == crs[j].CourseName)
+                        $('#StudentDetails').append('<tr><td>' + stud[i].StudentId +  '</td><td>'+ stud[i].StudentName +'</td></tr>');
+                }
+            }
+        }
+
+
+    </script>
+}
+

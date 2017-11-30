@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVCSearch.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        <p>
+
+            Search
+            @Html.RadioButton("searchBy", "Name", true) Name
+            @Html.RadioButton("searchBy", "Age") Age <br />
+            @*@Html.TextBox("searchText" )*@
+            <input type="text" name ="searchText" id="searchText" value="@ViewBag.searchText" placeholder="Enter your search" />
+            <input type="submit" value="Search" />
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Name", "Index", routeValues: new { orderBy = @ViewBag.OrderByName, searchBy = Request["searchBy"], SearchText = ViewBag.SearchText })
+                </th>
+                <th>
+                    @Html.ActionLink("Age", "Index", routeValues: new { orderBy = @ViewBag.OrderByAge, searchBy = Request["searchBy"], SearchText = ViewBag.SearchText })
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Name }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+</body>

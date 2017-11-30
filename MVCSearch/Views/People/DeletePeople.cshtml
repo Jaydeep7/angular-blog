@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MVCSearch.Models.Person>
+
+@{
+    ViewBag.Title = "Delete Peoples";
+}
+
+@using (Html.BeginForm())
+{ 
+<table border="1">
+    <thead>
+        <tr>
+        <td> Select </td>
+        <td> Name </td>
+        <td> Age </td>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.EditorForModel()
+    </tbody>
+
+</table>
+    <input type="submit" value="Delete Selected" />
+}

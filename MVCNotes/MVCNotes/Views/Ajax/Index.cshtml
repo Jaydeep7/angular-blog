@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<h2>Index</h2>
+
+@Ajax.BeginForm("ShowDetails", "Ajax", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "div1" })
+
+Search Product ( enter product code ) : @Html.TextBox("txtSearch")
+
+<input type="submit" value="Find" />
+<input type="reset" value="Clear" />
+
+@{Html.EndForm();}
+
+<div id="div1">
+
+</div>

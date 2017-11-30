@@ -1,0 +1,12 @@
+﻿@model MVCNotes.Views.Home.Notes
+
+<tr>
+    <td>
+        @Html.CheckBoxFor(modelItem => Model.Completed, new { id = Model.Id })   @Html.DisplayFor(modelItem => Model.Description)
+    </td>
+    <td>
+        <button id="btn" value="@Model.Id" name="button1"> @(Model.Completed == false ? "Done" : "UnDone")</button>
+    </td>
+    <td>
+    </td>
+</tr>

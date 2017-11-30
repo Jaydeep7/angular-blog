@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVCNotes.Views.Home.Notes>
+
+@{
+    ViewBag.Title = "AllNotes";
+//    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+
+<h2>AllNotes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Completed)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+         //@Html.Partial("note", item)
+            {Html.RenderPartial("note", item); }
+        }
+
+    </table>
+
+    @section test     
+    { 
+     @Html.ActionLink("Test Seection - Click Me","AllNotes")
+     }
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $("#btn").onclick(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Notes/AllNotes",
+                data: param = "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) { alert("Successful....."); console.log(data); },
+                error: function () { alert("ERROR ERROR ERROR"); }
+            });
+        });
+
+    </script>
+
+
+}

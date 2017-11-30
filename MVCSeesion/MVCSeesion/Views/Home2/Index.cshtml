@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Controller -2 </h1>
+
+<h2> Session : @Session["test"]  </h2>
+
+@using (Html.BeginForm()) {
+
+<input type="submit" value="Add Session" name="button" />
+<input type="submit" value="Remove Session" name="button" />
+
+}

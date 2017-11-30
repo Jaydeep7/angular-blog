@@ -1,0 +1,32 @@
+<html ng-app="app">
+
+<head>
+    <title>angularjs</title>
+
+    <link rel="stylesheet" href="css.css" />
+</head>
+
+<body ng-controller="MainController">
+    <h1>{{message}}</h1>
+
+    <form name="MyFrom" ng-submit="search(username)">
+        <input type="search" placeholder="User Name to search" ng-model="username" value="angujar" autofocus>
+        <input type="submit" value="Search">
+    </form>
+
+    <div ng-show="user">
+        <a href="#userDetails">Logo</a>
+        <a href="#userDetails2">Repositories</a> 
+    </div>
+
+    <div>
+        <ng-view ng-show="user"> </ng-view>
+    </div>
+    
+    <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="JavaScript.js"></script>
+
+</body>
+
+</html>

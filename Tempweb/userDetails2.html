@@ -1,0 +1,19 @@
+<br />
+<input placeholder="Search repos..." ng-model="search.full_name"/>
+<table border="1">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Stars </th>
+            <th> Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="repo in repos | orderBy:'-stargazers_count' | filter:search">
+            <td> {{repo.full_name}}</td>
+            <td> {{repo.stargazers_count | number }}</td>
+            <td> {{repo.language}}</td>
+        </tr>
+    </tbody>
+
+</table>

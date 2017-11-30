@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    //Layout = "~/Views/_Layout.cshtml";
+    Layout = null;
+}
+
+@using (Html.BeginForm())
+{
+
+    //ajax Call using Ajax.actionlink
+    @Ajax.ActionLink("Ajax with MVC", "ajaxCall", new { id = 1 }, new AjaxOptions
+{
+    Url = "/Home/ajaxCall",
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "GET",
+    UpdateTargetId = "div1 ",
+    OnComplete = "jsAjaxCall"
+});
+
+    //ajax call using jquery
+    <button id="btnAjax"> jQueyr-Ajax </button>
+
+}
+
+<div1 id="result">
+    <h6 id="result1">Hi...</h6 >
+</div1>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+    function jsAjaxCall() {
+        $('#result').append('<h1> hellow from js</h1>');
+    }
+
+    $(function () {
+        $('#btnAjax').click(function (e) {
+            e.preventDefault();
+            console.log('hellow from jQueyr Ajax');
+            $.ajax({
+                url: '/Home/ajaxCall',
+                type: 'GET',
+                success: function (data) {
+                    $('#result1').append(data).append(data);
+                }
+            });
+        });
+    });
+</script>
+@*@section Scripts
+    {
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    }*@

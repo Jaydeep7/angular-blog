@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "ViewData - Demo";
+}
+<form>
+    <h2>ViewData - Demo</h2> <br />
+    <input type="text" id="mytext" value="extra textbox"/>
+    <h4> select course : </h4>
+    <select id="sltCourse">
+        <option>select course</option>
+        @foreach (var item in ViewData["Courses"] as List<TransferDataFromControllerToView.Models.Course>)
+            {
+            <option> @item.CourseName  </option>
+        }
+    </select>
+    <br />
+    <div id="facultydetailsection">
+        <h4> Alloted faculties to selected course : </h4>
+        <div id="tblfaculty">    </div>
+    </div>
+    <br />
+    <div id="studentdetailsection">
+        <h4> Students in selected course : </h4>
+        <div id="txt2"></div>
+    </div>
+    
+</form>
+
+
+
+@section MyScripts
+{
+    <script src="~/Scripts/MyJS.js"></script>
+    <script type="text/javascript">
+    
+        $(function () {
+
+            $('#facultydetailsection').fadeOut();
+            $('#studentdetailsection').fadeOut();
+
+            var $selectedCourse;
+
+            $('#sltCourse').on('change', function () {
+                $selectedCourse = this.value;  //gets the selected option's value
+            
+                if ($selectedCourse == 'select course')
+                {
+                    $('#facultydetailsection').fadeOut();
+                    $('#studentdetailsection').fadeOut();
+                }
+                else
+                {
+                    getFacultyDetails();
+                    getStudentDetails();
+                    $('#facultydetailsection').fadeIn();
+                    $('#studentdetailsection').fadeIn();
+                }
+
+            });
+
+            function getFacultyDetails() {
+                $('#facultydetailsection').empty();
+                $('#facultydetailsection').append('<table border = 1 > <tr><td> Factulty ID </td> <td> Faculty Name </td> </tr>');
+
+                var faculty = @Html.Raw(Json.Encode(ViewData["Faculties"]));
+                //console.log(faculty);
+                for(i = 0;i<= faculty.length -1;i++){
+                   var course = faculty[i].AllotedCourses;
+                    //console.log(course);
+                    for(j = 0;j< course.length-1;j++){
+                        //console.log($selectedCourse );
+                        //console.log(course);
+                        if ($selectedCourse == course[j].CourseName){
+                            //alert(course[j].CourseName);
+                            $('#facultydetailsection').append("<tr><td>" + faculty[i].FacultyId + "</td><td>" + faculty[j].FacultyName + "</td></tr>");
+                        }
+                    }
+                    
+                    $('#facultydetailsection').fadeIn();
+                }
+
+            }
+
+            function getStudentDetails() {
+                $('#studentdetailsection').empty();
+                $('#studentdetailsection').append('<table border = 1 > <tr><td> Student ID </td> <td> Student Name </td> </tr>');
+
+                var student = @Html.Raw(Json.Encode(ViewData["students"]));
+                //console.log(faculty);
+                for(i = 0;i<= student.length -1;i++){
+                    var course = student[i].EnrolledCourses;
+                    //console.log(course);
+                    for(j = 0;j< course.length-1;j++){
+                        //console.log($selectedCourse );
+                        //console.log(course);
+                        if ($selectedCourse == course[j].CourseName){
+                            //alert(course[j].CourseName);
+                            //console.log(student[i]);
+                            //console.log(student[i].StudentId);
+                            $('#studentdetailsection').append("<tr><td>" + student[i].StudentId + "</td><td>" + student[j].StduentName + "</td></tr>");
+                        }
+                    }
+                    
+                    $('#studentdetailsection').fadeIn();
+                }
+            }
+
+        });
+
+    </script>
+}

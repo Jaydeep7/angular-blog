@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MVCNotes.Views.Home.Notes>
+
+@{
+//    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditNotes</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.EditorForModel();
+
+        </div>
+
+        <br />
+        <input type="submit" value="submit" />
+    }
+    @Html.ActionLink("Open all noes in new window","AllNotes","Notes", new { target = "_blank" })
+</body>
+</html>
